@@ -49,7 +49,7 @@ function sign_up(){
         </label>
       </div>
     </div>
-    )
+    );
 }
 
 export default sign_up;
