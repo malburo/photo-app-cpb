@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-29T08:03:26.990Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/91.0.146 Chrome/85.0.4183.146 Safari/537.36" etag="xYK6lw6n7OGT2MHhk2Wh" version="14.1.3" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-29T08:07:16.116Z" agent="5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/91.0.146 Chrome/85.0.4183.146 Safari/537.36" etag="5IMeF5ilFCi6QDt3BzTR" version="14.1.3" type="github">
   <diagram id="1OZ0fzqCseCf3csZvTV9" name="Page-1">
     <mxGraphModel dx="994" dy="573" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
@@ -755,7 +755,7 @@
             <mxPoint x="455" y="1843" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="JmSiCJQjTblQtKM56OBv-13" value="Đăng/Xóa" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+        <mxCell id="JmSiCJQjTblQtKM56OBv-13" value="Tương tác" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="196.5" y="1804" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="JmSiCJQjTblQtKM56OBv-14" value="" style="endArrow=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="JmSiCJQjTblQtKM56OBv-4" target="JmSiCJQjTblQtKM56OBv-13" edge="1">
