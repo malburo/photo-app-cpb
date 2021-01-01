@@ -8,6 +8,8 @@ import LockIcon from '@material-ui/icons/Lock';
 import MailIcon from '@material-ui/icons/Mail';
 import Box from '@material-ui/core/Box';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useForm } from 'react-hook-form';
+import InputField from 'form-controls/InputField';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -17,7 +19,17 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginForm = () => {
   const classes = useStyles();
-
+  const form = useForm({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
   return (
     <Container component="main" maxWidth="xs">
       <Box border="1px solid #bdbdbd" borderRadius="24px" padding="32px 48px">
@@ -26,42 +38,10 @@ const LoginForm = () => {
         <Typography variant="subtitle1">
           Master web development by making real-life projects. There are multiple paths for you to choose
         </Typography>
-        <form>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            placeholder="Your Email*"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <MailIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            type="password"
-            id="password"
-            placeholder="Your Password*"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
+
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
+          <InputField name="email" placeholder="Your Email*" icon={<MailIcon />} form={form} />
+          <InputField name="password" placeholder="Your password*" icon={<LockIcon />} form={form} />
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Login now
           </Button>
