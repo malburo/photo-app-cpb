@@ -1,0 +1,107 @@
+
+
+:root {
+    --primary-color: #4797ff;
+    --text-color: #202020;
+  }
+
+  .signup {
+    width: 100%;
+    max-width: 50rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 5.5rem 3.5rem;
+  }
+
+  .signup_heading {
+    font-size: 4rem;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+
+  .signup_already {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .signup_link {
+    color: var(--primary-color);
+    font-size: inherit;
+    text-decoration: none;
+  }
+
+  .signup-link-underline {
+    text-decoration: underline;
+  }
+
+  .form_group {
+    margin-bottom: 15px;
+  }
+
+  .form_group-2 {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .form_input {
+    font-family: "Poppins", sans-serif;
+    color: black;
+    padding: 1.5rem;
+    border-radius: 10rem;
+    outline: none;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border: 1px solid #eeeeee;
+    background-color: #f7f4f4;
+    transition: 0.25s linear;
+    width: 100%;
+  }
+
+  .form_input:focus {
+    border-color: #eeeeee;
+    background-color: #ffffff;
+  }
+
+  .form_group-2 > .form_input {
+    width: calc(50% - 48px);
+  }
+
+  .form_group-2 > .form_input:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .form_group-2 > .form_input:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form_input::-webkit-input-placeholder {
+    color: #cfcbcb;
+    font-style: italic;
+  }
+
+  .form_submit {
+    border-radius: 10px;
+    color: #ffffff;
+    padding: 1.5rem;
+    outline: none;
+    font-size: 1.6rem;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form_tos {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+  }
