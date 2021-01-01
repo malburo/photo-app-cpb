@@ -1,15 +1,13 @@
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockIcon from '@material-ui/icons/Lock';
 import MailIcon from '@material-ui/icons/Mail';
-import Box from '@material-ui/core/Box';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { useForm } from 'react-hook-form';
 import InputField from 'form-controls/InputField';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
