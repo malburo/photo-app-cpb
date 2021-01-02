@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import LockIcon from '@material-ui/icons/Lock';
 import MailIcon from '@material-ui/icons/Mail';
 import InputField from 'form-controls/InputField';
+import PasswordField from 'form-controls/PasswordField';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -39,7 +40,7 @@ const LoginForm = () => {
 
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <InputField name="email" placeholder="Your Email*" icon={<MailIcon />} form={form} />
-          <InputField name="password" placeholder="Your password*" icon={<LockIcon />} form={form} />
+          <PasswordField name="password" placeholder="Your password*" icon={<LockIcon />} form={form} />
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Login now
           </Button>
