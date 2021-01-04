@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = () => {
+const LoginForm = ({ onSubmit }) => {
   const classes = useStyles();
   const form = useForm({
     mode: 'onSubmit',
@@ -26,9 +26,6 @@ const LoginForm = () => {
       password: '',
     },
   });
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
   return (
     <Container component="main" maxWidth="xs">
       <Box border="1px solid #bdbdbd" borderRadius="24px" padding="32px 48px">
@@ -38,7 +35,7 @@ const LoginForm = () => {
           Master web development by making real-life projects. There are multiple paths for you to choose
         </Typography>
 
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <InputField name="email" placeholder="Your Email*" icon={<MailIcon />} form={form} />
           <PasswordField name="password" placeholder="Your password*" icon={<LockIcon />} form={form} />
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>

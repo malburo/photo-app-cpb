@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegisterForm = () => {
+const RegisterForm = ({ onSubmit }) => {
   const classes = useStyles();
   const form = useForm({
     mode: 'onSubmit',
@@ -29,9 +29,7 @@ const RegisterForm = () => {
       retypePassword: '',
     },
   });
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
+
   return (
     <Container component="main" maxWidth="xs">
       <Box border="1px solid #bdbdbd" borderRadius="24px" padding="32px 48px">
@@ -41,14 +39,14 @@ const RegisterForm = () => {
           Master web development by making real-life projects. There are multiple paths for you to choose
         </Typography>
 
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <InputField name="fullname" placeholder="Your fullname*" icon={<PersonIcon />} form={form} />
           <InputField name="email" placeholder="Your email*" icon={<MailIcon />} form={form} />
           <PasswordField name="password" placeholder="Your password*" icon={<LockIcon />} form={form} />
           <PasswordField name="retypePassword" placeholder="Retype password*" icon={<LockIcon />} form={form} />
 
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            Login now
+            Register now
           </Button>
           <Typography variant="subtitle1" align="center">
             Already registered?
