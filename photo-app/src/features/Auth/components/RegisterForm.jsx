@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -10,12 +11,23 @@ import InputField from 'form-controls/InputField';
 import PasswordField from 'form-controls/PasswordField';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(2, 0),
   },
 }));
+
+const schema = yup.object().shape({
+  fullname: yup.string().required('Please enter your full name.').min(6, 'Please enter at least 6 characters.'),
+  email: yup.string().required('Please enter your email.').email('Please enter a valid email address.'),
+  password: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
+  retypePassword: yup
+    .string()
+    .required('Please retype your password.')
+    .oneOf([yup.ref('password')], 'Password does not match'),
+});
 
 const RegisterForm = ({ onSubmit }) => {
   const classes = useStyles();
@@ -28,6 +40,7 @@ const RegisterForm = ({ onSubmit }) => {
       password: '',
       retypePassword: '',
     },
+    resolver: yupResolver(schema),
   });
 
   return (

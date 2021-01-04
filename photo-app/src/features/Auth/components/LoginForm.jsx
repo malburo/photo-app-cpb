@@ -9,12 +9,18 @@ import InputField from 'form-controls/InputField';
 import PasswordField from 'form-controls/PasswordField';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(2, 0),
   },
 }));
+
+const schema = yup.object().shape({
+  email: yup.string().required('Please enter your email.').email('Please enter a valid email address.'),
+  password: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
+});
 
 const LoginForm = ({ onSubmit }) => {
   const classes = useStyles();
@@ -25,6 +31,7 @@ const LoginForm = ({ onSubmit }) => {
       email: '',
       password: '',
     },
+    resolver: yupResolver(schema),
   });
   return (
     <Container component="main" maxWidth="xs">
