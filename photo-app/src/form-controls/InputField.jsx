@@ -19,6 +19,7 @@ const InputField = (props) => {
       InputProps={{
         startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
       }}
+      helperText={errors[name]?.message}
     />
   );
 };

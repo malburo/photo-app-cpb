@@ -1,4 +1,4 @@
-import { InputAdornment } from '@material-ui/core';
+import { FormHelperText, InputAdornment } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -17,7 +17,7 @@ const PasswordField = (props) => {
     setIsHidden((prev) => !prev);
   };
   return (
-    <FormControl fullWidth variant="outlined" margin="normal">
+    <FormControl fullWidth variant="outlined" margin="normal" error={hasError}>
       <Controller
         name={name}
         control={form.control}
@@ -36,6 +36,7 @@ const PasswordField = (props) => {
         error={hasError}
         disabled={disabled}
       />
+      <FormHelperText>{errors[name]?.message}</FormHelperText>
     </FormControl>
   );
 };
