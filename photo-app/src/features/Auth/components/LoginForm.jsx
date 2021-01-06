@@ -37,9 +37,9 @@ const LoginForm = ({ onSubmit }) => {
     <Container component="main" maxWidth="xs">
       <Box border="1px solid #bdbdbd" borderRadius="24px" padding="32px 48px">
         <Typography variant="subtitle1">Photo app</Typography>
-        <Typography variant="subtitle2">Join thousands of learners from around the world</Typography>
+        <Typography variant="subtitle2">Join to discover thousands of photos from around the world</Typography>
         <Typography variant="subtitle1">
-          Master web development by making real-life projects. There are multiple paths for you to choose
+          Beautiful, free images and photos that you can download and use for any project.
         </Typography>
 
         <form onSubmit={form.handleSubmit(onSubmit)}>

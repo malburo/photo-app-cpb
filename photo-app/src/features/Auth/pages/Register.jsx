@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import RegisterForm from '../components/RegisterForm';
-import { register } from '../userSlice';
+import { register } from '../../../app/userSlice';
 
 const useStyles = makeStyles(() => ({
   wrapper: {
