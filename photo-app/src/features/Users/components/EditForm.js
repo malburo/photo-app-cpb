@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Avatar } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -61,8 +62,6 @@ const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
       form.setValue('bio', currentUser.bio || '');
     }
   }, [currentUser]);
-
-  const handleUpdateAvatar = () => {};
   return (
     <Container component="main" maxWidth="md">
       <input type="file" name="file" onChange={onUpdateAvatar} />
