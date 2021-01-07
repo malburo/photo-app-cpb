@@ -2,6 +2,7 @@ import { Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from 'components/Header';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import InfoBox from '../components/InfoBox';
 
 const useStyles = makeStyles(() => ({
@@ -14,9 +15,9 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
   },
 }));
-export default function Profile() {
+const Profile = () => {
   const classes = useStyles();
-
+  const currentUser = useSelector((state) => state.user.current);
   return (
     <div className={classes.wrapper}>
       <Header />
@@ -28,7 +29,8 @@ export default function Profile() {
           Basic info, like your name and photo
         </Typography>
       </Box>
-      <InfoBox />
+      <InfoBox currentUser={currentUser} />
     </div>
   );
-}
+};
+export default Profile;

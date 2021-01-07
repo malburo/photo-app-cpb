@@ -10,9 +10,9 @@ import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 800,
+    width: 800,
     border: '1px solid #bdbdbd',
-    borderRadius: 24,
+    borderRadius: 12,
   },
   firstText: {
     width: 200,
@@ -22,9 +22,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 13,
     color: '#BDBDBD',
   },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
 }));
 
-const InfoBox = () => {
+const InfoBox = ({ currentUser }) => {
   const classes = useStyles();
 
   return (
@@ -40,22 +44,20 @@ const InfoBox = () => {
       <ListItem divider>
         <ListItemText primary="PHOTO" className={classes.firstText} />
         <ListItemAvatar>
-          <Avatar variant="rounded">
-            <ImageIcon />
-          </Avatar>
+          <Avatar variant="rounded" className={classes.large} src={currentUser.profilePictureUrl} />
         </ListItemAvatar>
       </ListItem>
       <ListItem divider>
         <ListItemText primary="NAME" className={classes.firstText} />
-        <ListItemText primary="Tong Quoc Bao" />
+        <ListItemText primary={currentUser.fullname} />
       </ListItem>
       <ListItem divider>
         <ListItemText primary="BIO" className={classes.firstText} />
-        <ListItemText primary="I am a software developer and a big fan of devchallenges..." />
+        <ListItemText primary={currentUser.bio || 'Nothing'} />
       </ListItem>
       <ListItem divider>
         <ListItemText primary="EMAIL" className={classes.firstText} />
-        <ListItemText primary="tonqquocbao@gmail.com" />
+        <ListItemText primary={currentUser.email} />
       </ListItem>
       <ListItem>
         <ListItemText primary="PASSWORD" className={classes.firstText} />

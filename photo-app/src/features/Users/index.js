@@ -1,4 +1,5 @@
 import { Route, Switch, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
+import EditProfile from './pages/EditProfile';
 import Profile from './pages/Profile';
 
 const UserFeature = () => {
@@ -6,6 +7,7 @@ const UserFeature = () => {
   return (
     <Switch>
       <Route exact path={`${match.url}/profile`} component={Profile} />
+      <Route exact path={`${match.url}/profile/edit`} component={EditProfile} />
     </Switch>
   );
 };
