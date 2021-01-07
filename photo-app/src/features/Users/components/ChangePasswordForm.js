@@ -35,7 +35,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('newPassword')], 'Password does not match'),
 });
 
-const ChangePasswordForm = ({ onSubmit }) => {
+const ChangePasswordForm = ({ onUpdatePassword }) => {
   const classes = useStyles();
   const form = useForm({
     mode: 'onSubmit',
@@ -47,13 +47,11 @@ const ChangePasswordForm = ({ onSubmit }) => {
     },
     resolver: yupResolver(schema),
   });
-  const handleSubmit = (values) => {
-    console.log(values);
-  };
+
   return (
     <Container component="main" maxWidth="md">
       <Box maxWidth={400}>
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <form onSubmit={form.handleSubmit(onUpdatePassword)}>
           <PasswordField
             name="currentPassword"
             label="Name"

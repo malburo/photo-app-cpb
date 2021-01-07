@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { updateMe } from 'app/userSlice';
+import uploadApi from 'api/uploadApi';
+import { updateAvatar, updateMe, updatePassword } from 'app/userSlice';
 import Header from 'components/Header';
 import { useSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux';
@@ -28,10 +29,32 @@ const EditProfile = () => {
       enqueueSnackbar('Account information updated error !!', { variant: 'error' });
     }
   };
+  const handleUpdatePassword = async (values) => {
+    try {
+      await dispatch(updatePassword(values));
+      enqueueSnackbar('Password updated successfully !!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar('Password updated error !!', { variant: 'error' });
+    }
+  };
+  const handleUpdateAvatar = async (event) => {
+    try {
+      let formData = new FormData();
+      formData.append('image', event.target.files[0]);
+      const data = await uploadApi.upload(formData);
+      await dispatch(updateAvatar({ profilePictureUrl: data.path }));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className={classes.wrapper}>
       <Header />
-      <VerticalTabs handleUpdateInfo={handleUpdateInfo} />
+      <VerticalTabs
+        handleUpdateInfo={handleUpdateInfo}
+        handleUpdatePassword={handleUpdatePassword}
+        handleUpdateAvatar={handleUpdateAvatar}
+      />
     </div>
   );
 };

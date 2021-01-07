@@ -23,6 +23,15 @@ export const updateMe = createAsyncThunk('user/updateMe', async (payload) => {
   return data;
 });
 
+export const updatePassword = createAsyncThunk('user/updatePassword', async (payload) => {
+  const data = await userApi.updatePassword(payload);
+  return data;
+});
+export const updateAvatar = createAsyncThunk('user/updateAvatar', async (payload) => {
+  const data = await userApi.updateAvatar(payload);
+  return data;
+});
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -48,7 +57,14 @@ const userSlice = createSlice({
     },
 
     [updateMe.fulfilled]: (state, { payload }) => {
+      state.current = payload.currentUser;
+    },
+
+    [updatePassword.fulfilled]: (state, { payload }) => {
       console.log(payload);
+    },
+
+    [updateAvatar.fulfilled]: (state, { payload }) => {
       state.current = payload.currentUser;
     },
   },

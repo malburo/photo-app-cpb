@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VerticalTabs({ handleUpdateInfo }) {
+export default function VerticalTabs({ handleUpdateInfo, handleUpdatePassword, handleUpdateAvatar }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -71,10 +71,10 @@ export default function VerticalTabs({ handleUpdateInfo }) {
         <Tab label="Change Password" icon={<LockIcon style={{ margin: '0 10px' }} />} {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0} className={classes.tabPanel}>
-        <EditForm onUpdateInfo={handleUpdateInfo} />
+        <EditForm onUpdateInfo={handleUpdateInfo} onUpdateAvatar={handleUpdateAvatar} />
       </TabPanel>
       <TabPanel value={value} index={1} className={classes.tabPanel}>
-        <ChangePasswordForm />
+        <ChangePasswordForm onUpdatePassword={handleUpdatePassword} />
       </TabPanel>
     </div>
   );

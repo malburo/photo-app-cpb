@@ -41,7 +41,7 @@ const schema = yup.object().shape({
   bio: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
 });
 
-const EditForm = ({ onUpdateInfo }) => {
+const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
   const currentUser = useSelector((state) => state.user.current);
   const classes = useStyles();
   const form = useForm({
@@ -61,8 +61,11 @@ const EditForm = ({ onUpdateInfo }) => {
       form.setValue('bio', currentUser.bio || '');
     }
   }, [currentUser]);
+
+  const handleUpdateAvatar = () => {};
   return (
     <Container component="main" maxWidth="md">
+      <input type="file" name="file" onChange={onUpdateAvatar} />
       <Box maxWidth={400}>
         <div className={classes.avatarBox}>
           <Avatar variant="rounded" className={classes.large} src={currentUser.profilePictureUrl} />
