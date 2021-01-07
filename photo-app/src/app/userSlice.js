@@ -1,11 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authApi from 'api/authApi';
+import userApi from 'api/userApi';
 import StorageKeys from 'constants/storage-key';
-
-export const getMe = createAsyncThunk('user/getMe', async (payload) => {
-  const data = await authApi.getMe(payload);
-  return data;
-});
 
 export const register = createAsyncThunk('user/register', async (payload) => {
   const data = await authApi.register(payload);
@@ -14,6 +10,16 @@ export const register = createAsyncThunk('user/register', async (payload) => {
 
 export const login = createAsyncThunk('user/login', async (payload) => {
   const data = await authApi.login(payload);
+  return data;
+});
+
+export const getMe = createAsyncThunk('user/getMe', async () => {
+  const data = await userApi.getMe();
+  return data;
+});
+
+export const updateMe = createAsyncThunk('user/updateMe', async (payload) => {
+  const data = await userApi.updateMe(payload);
   return data;
 });
 
@@ -29,19 +35,20 @@ const userSlice = createSlice({
     },
   },
   extraReducers: {
-    [getMe.fulfilled]: (state, { payload }) => {
-      state.current = payload.currentUser;
-    },
-
     [register.fulfilled]: (state, { payload }) => {
       localStorage.setItem(StorageKeys.ACCESS_TOKEN, payload.access_token);
-      localStorage.setItem(StorageKeys.USER, JSON.stringify(payload.currentUser));
-      state.current = payload.currentUser;
     },
 
     [login.fulfilled]: (state, { payload }) => {
       localStorage.setItem(StorageKeys.ACCESS_TOKEN, payload.access_token);
-      localStorage.setItem(StorageKeys.USER, JSON.stringify(payload.currentUser));
+    },
+
+    [getMe.fulfilled]: (state, { payload }) => {
+      state.current = payload.currentUser;
+    },
+
+    [updateMe.fulfilled]: (state, { payload }) => {
+      console.log(payload);
       state.current = payload.currentUser;
     },
   },

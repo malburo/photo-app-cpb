@@ -3,8 +3,15 @@ import AuthFeature from 'features/Auth';
 import PhotoFeature from 'features/Photos';
 import Main from 'features/Photos/pages/Main';
 import UserFeature from 'features/Users';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getMe } from 'app/userSlice';
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
   return (
     <div className="App">
       <Switch>
