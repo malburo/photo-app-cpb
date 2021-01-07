@@ -8,13 +8,15 @@ import theme from 'theme';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-
+import { SnackbarProvider } from 'notistack';
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <Router>
-          <App />
+          <SnackbarProvider maxSnack={3} hideIconVariant>
+            <App />
+          </SnackbarProvider>
         </Router>
       </Provider>
     </ThemeProvider>

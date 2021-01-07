@@ -63,6 +63,12 @@ const theme = createMuiTheme({
         minWidth: 30,
       },
     },
+    MuiTab: {
+      wrapper: {
+        flexDirection: 'row',
+        justifyContent: 'start',
+      },
+    },
   },
 });
 
