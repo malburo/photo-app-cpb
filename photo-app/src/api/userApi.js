@@ -7,6 +7,12 @@ const userApi = {
   updateMe: (payload) => {
     return request.post('users/me', payload);
   },
+  updatePassword: (payload) => {
+    return request.post('users/me/password', payload);
+  },
+  updateAvatar: (payload) => {
+    return request.post('users/me/avatar', payload);
+  },
   deleteMe: (payload) => {
     return request.post('users/me', payload);
   },
