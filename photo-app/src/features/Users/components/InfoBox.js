@@ -5,7 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
-import ImageIcon from '@material-ui/icons/Image';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
