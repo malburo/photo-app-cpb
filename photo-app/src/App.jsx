@@ -6,11 +6,13 @@ import UserFeature from 'features/Users';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getMe } from 'app/userSlice';
+import { getAllPhotos } from 'features/Photos/photoSlice';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMe());
+    dispatch(getAllPhotos());
   }, [dispatch]);
   return (
     <div className="App">

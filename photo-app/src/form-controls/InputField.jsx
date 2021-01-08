@@ -1,4 +1,4 @@
-import { FormControl, InputAdornment, TextField } from '@material-ui/core';
+import { FormControl, InputAdornment, TextField, Typography } from '@material-ui/core';
 import { Controller } from 'react-hook-form';
 
 const InputField = (props) => {
@@ -7,6 +7,9 @@ const InputField = (props) => {
   const hasError = !!errors[name];
   return (
     <FormControl fullWidth margin="normal" error={hasError}>
+      <Typography variant="h6" color="initial">
+        {label}
+      </Typography>
       <Controller
         name={name}
         control={form.control}
@@ -15,7 +18,6 @@ const InputField = (props) => {
         error={hasError}
         disabled={disabled}
         placeholder={placeholder}
-        label={label}
         InputProps={
           icon && {
             startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,
