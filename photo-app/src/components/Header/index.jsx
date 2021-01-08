@@ -1,7 +1,6 @@
 import { InputAdornment } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Menu from '@material-ui/core/Menu';
@@ -12,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SearchIcon from '@material-ui/icons/Search';
+import AddPhotoForm from 'features/Photos/components/AddPhotoForm';
 import { useState } from 'react';
 
 const Header = () => {
@@ -45,9 +45,7 @@ const Header = () => {
               ),
             }}
           />
-          <Button variant="contained" color="primary">
-            Add
-          </Button>
+          <AddPhotoForm />
           <Avatar variant="rounded" onClick={handleClick}>
             <AssignmentIcon />
           </Avatar>
