@@ -8,13 +8,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SearchIcon from '@material-ui/icons/Search';
 import AddPhotoForm from 'features/Photos/components/AddPhotoForm';
 import { useState } from 'react';
-
+import { useSelector } from 'react-redux';
+import Logo from '../../images/Logo-small.svg';
 const Header = () => {
+  const currentUser = useSelector((state) => state.user.current);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,9 +25,10 @@ const Header = () => {
     setAnchorEl(null);
   };
   return (
-    <AppBar position="fixed" color="secondary">
+    <AppBar position="fixed">
       <Container maxWidth="lg">
         <Toolbar>
+          <img src={Logo} alt="logo" />
           <Typography variant="h6" color="inherit">
             Photo App
           </Typography>
@@ -46,9 +48,7 @@ const Header = () => {
             }}
           />
           <AddPhotoForm />
-          <Avatar variant="rounded" onClick={handleClick}>
-            <AssignmentIcon />
-          </Avatar>
+          <Avatar variant="rounded" src={currentUser.profilePictureUrl} onClick={handleClick} />
         </Toolbar>
       </Container>
       <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
