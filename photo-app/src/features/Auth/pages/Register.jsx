@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+import { register } from '../../../app/userSlice';
 import RegisterForm from '../components/RegisterForm';
-import { getMe, register } from '../../../app/userSlice';
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -19,7 +19,6 @@ const Register = () => {
 
   const handleSubmit = async (values) => {
     await dispatch(register(values));
-    await dispatch(getMe());
   };
   return (
     <div className={classes.wrapper}>

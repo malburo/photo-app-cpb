@@ -39,7 +39,7 @@ const userSlice = createSlice({
   },
   reducers: {
     logout(state) {
-      localStorage.removeItem(StorageKeys.USER);
+      localStorage.removeItem(StorageKeys.ACCESS_TOKEN);
       state.current = {};
     },
   },
