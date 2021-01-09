@@ -1,11 +1,12 @@
 import { Switch, useRouteMatch, Route } from 'react-router-dom/cjs/react-router-dom.min';
-import Gallery from './pages/Gallery';
+import GalleryPage from './pages/GalleryPage';
 
 const PhotoFeature = () => {
   const match = useRouteMatch();
   return (
     <Switch>
-      <Route exact path={`${match.url}/gallery`} component={Gallery} />
+      <Route exact path={match.url} component={GalleryPage} />
+      <Route exact path={`${match.url}/photos/:photoId`} component={GalleryPage} />
     </Switch>
   );
 };

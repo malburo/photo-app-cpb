@@ -1,5 +1,5 @@
 import { Container, makeStyles } from '@material-ui/core';
-import PhotoCard from './PhotoCard';
+import MyPhotoCard from './MyPhotoCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +20,7 @@ const PhotoList = ({ photos }) => {
     <Container>
       <div className={classes.root}>
         {photos.map((photo) => (
-          <PhotoCard key={photo._id} photo={photo} />
+          <MyPhotoCard key={photo._id} photo={photo} />
         ))}
       </div>
     </Container>

@@ -3,27 +3,50 @@ import photoApi from 'api/photoApi';
 
 export const getAllPhotos = createAsyncThunk('photos/getAll', async () => {
   const data = await photoApi.getAll();
-  console.log(data);
   return data;
 });
-
+export const getAllPhotosOfMe = createAsyncThunk('photos/getAllOfMe', async () => {
+  const data = await photoApi.getAllOfMe();
+  return data;
+});
 export const createPhoto = createAsyncThunk('photos/create', async (payload) => {
   const data = await photoApi.create(payload);
   return data;
 });
-
+export const updatePhoto = createAsyncThunk('photos/update', async (payload) => {
+  const data = await photoApi.update(payload);
+  return data;
+});
+export const deletePhoto = createAsyncThunk('photos/delete', async (photoId) => {
+  const data = await photoApi.delete(photoId);
+  return data;
+});
 const userSlice = createSlice({
   name: 'photos',
   initialState: {
     photoList: [],
+    gallery: [],
   },
   reducers: {},
   extraReducers: {
     [getAllPhotos.fulfilled]: (state, { payload }) => {
       state.photoList = payload.photos;
     },
+    [getAllPhotosOfMe.fulfilled]: (state, { payload }) => {
+      state.gallery = payload.photos;
+    },
     [createPhoto.fulfilled]: (state, { payload }) => {
       state.photoList.unshift(payload.newPhoto);
+    },
+    [updatePhoto.fulfilled]: (state, { payload }) => {
+      const indexInPhotoList = state.photoList.findIndex((photo) => photo._id === payload.photoUpdated._id);
+      const indexInGallery = state.gallery.findIndex((photo) => photo._id === payload.photoUpdated._id);
+      state.photoList[indexInPhotoList] = payload.photoUpdated;
+      state.gallery[indexInGallery] = payload.photoUpdated;
+    },
+    [deletePhoto.fulfilled]: (state, { payload }) => {
+      state.photoList = state.photoList.filter((photo) => photo._id !== payload._id);
+      state.gallery = state.gallery.filter((photo) => photo._id !== payload._id);
     },
   },
 });
