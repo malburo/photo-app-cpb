@@ -14,12 +14,34 @@ const theme = createMuiTheme({
       fontSize: 18,
       fontWeight: 600,
     },
+    subtitle3: {
+      fontSize: 18,
+      fontWeight: 600,
+      color: '#fff',
+      marginLeft: 10,
+    },
     fontFamily: ['Noto Sans', 'sans-serif'].join(','),
     button: {
       textTransform: 'none',
     },
   },
   overrides: {
+    MuiAppBar: {
+      colorPrimary: {
+        backgroundColor: '#fff',
+        color: 'black',
+      },
+    },
+    MuiPaper: {
+      elevation4: {
+        boxShadow: 0,
+      },
+    },
+    MuiDialog: {
+      paperWidthSm: {
+        maxWidth: 'none',
+      },
+    },
     MuiOutlinedInput: {
       root: {
         borderRadius: 12,
