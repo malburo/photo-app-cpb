@@ -7,6 +7,9 @@ const photoApi = {
   getAllOfMe: () => {
     return request.get(`photos/users/me`);
   },
+  search: (payload) => {
+    return request.get(`photos/search?fullname=${payload.search}`);
+  },
   getById: (photoId) => {
     return request.get(`photos/${photoId}`);
   },
