@@ -18,16 +18,21 @@ export const updatePhoto = createAsyncThunk('photos/update', async (payload) => 
   return data;
 });
 export const deletePhoto = createAsyncThunk('photos/delete', async (photoId) => {
-  const data = await photoApi.delete(photoId);
-  return data;
+  await photoApi.delete(photoId);
+  return photoId;
 });
 const userSlice = createSlice({
   name: 'photos',
   initialState: {
     photoList: [],
     gallery: [],
+    searchPhotoList: [],
   },
-  reducers: {},
+  reducers: {
+    searchPhoto(state, action) {
+      state.searchPhotoList = state.photoList.filter((photo) => photo.userId.fullname.indexOf(action.payload) > -1);
+    },
+  },
   extraReducers: {
     [getAllPhotos.fulfilled]: (state, { payload }) => {
       state.photoList = payload.photos;
@@ -37,6 +42,7 @@ const userSlice = createSlice({
     },
     [createPhoto.fulfilled]: (state, { payload }) => {
       state.photoList.unshift(payload.newPhoto);
+      state.gallery.unshift(payload.newPhoto);
     },
     [updatePhoto.fulfilled]: (state, { payload }) => {
       const indexInPhotoList = state.photoList.findIndex((photo) => photo._id === payload.photoUpdated._id);
@@ -45,11 +51,12 @@ const userSlice = createSlice({
       state.gallery[indexInGallery] = payload.photoUpdated;
     },
     [deletePhoto.fulfilled]: (state, { payload }) => {
-      state.photoList = state.photoList.filter((photo) => photo._id !== payload._id);
-      state.gallery = state.gallery.filter((photo) => photo._id !== payload._id);
+      state.photoList = state.photoList.filter((photo) => photo._id !== payload);
+      state.gallery = state.gallery.filter((photo) => photo._id !== payload);
     },
   },
 });
 
-const { reducer } = userSlice;
+const { actions, reducer } = userSlice;
+export const { searchPhoto } = actions;
 export default reducer;

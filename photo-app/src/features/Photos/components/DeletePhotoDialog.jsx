@@ -5,10 +5,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useDispatch } from 'react-redux';
+import { deletePhoto } from '../photoSlice';
 
-const DeletePhotoDialog = () => {
+const DeletePhotoDialog = ({ photoId }) => {
   const [open, setOpen] = React.useState(false);
-
+  const dispatch = useDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -16,7 +18,10 @@ const DeletePhotoDialog = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleOk = () => {
+    dispatch(deletePhoto(photoId));
+    setOpen(false);
+  };
   return (
     <>
       <Button variant="contained" color="secondary" onClick={handleClickOpen}>
@@ -33,7 +38,7 @@ const DeletePhotoDialog = () => {
           <DialogContentText id="alert-dialog-description">Are you sure ?</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose} color="primary" style={{ margin: 10 }}>
+          <Button variant="contained" onClick={handleOk} color="primary" style={{ margin: 10 }}>
             Yes
           </Button>
           <Button variant="contained" onClick={handleClose} autoFocus style={{ margin: 10 }}>

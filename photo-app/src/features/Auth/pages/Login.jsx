@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { login } from '../../../app/userSlice';
 import LoginForm from '../components/LoginForm';
 
@@ -16,9 +17,11 @@ const useStyles = makeStyles(() => ({
 const Login = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = async (values) => {
     await dispatch(login(values));
+    history.push('/');
   };
   return (
     <div className={classes.wrapper}>

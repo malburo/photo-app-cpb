@@ -34,7 +34,7 @@ const theme = createMuiTheme({
     },
     MuiPaper: {
       elevation4: {
-        boxShadow: 0,
+        boxShadow: '0 1px 30px 0 rgba(145,145,145,0.2);',
       },
     },
     MuiDialog: {
@@ -64,7 +64,6 @@ const theme = createMuiTheme({
     },
     MuiMenu: {
       paper: {
-        padding: 12,
         border: '1px solid #E0E0E0',
         borderRadius: 12,
         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.05)',
@@ -75,7 +74,7 @@ const theme = createMuiTheme({
         '&:hover': {
           backgroundColor: '#F2F2F2',
         },
-        marginBottom: 5,
+        margin: '8px 14px',
         borderRadius: 8,
         width: 160,
       },

@@ -82,7 +82,7 @@ const AddPhotoForm = () => {
 
         <DialogContent className={classes.dialog}>
           <div className={classes.upload}>
-            <label for="photoUpload">
+            <label htmlFor="photoUpload">
               {url.length > 0 && <img src={url} alt="preview" className={classes.image} />}
               <p>Upload file here !!</p>
             </label>

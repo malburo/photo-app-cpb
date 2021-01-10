@@ -45,7 +45,11 @@ const PhotoCard = ({ photo }) => {
   const classes = useStyles();
   const history = useHistory();
   const handleClickPhoto = () => {
-    history.push(`/photos/${photo._id}`);
+    if (history.location.pathname.split('/')[1] === 'search') {
+      history.push(`/search/photos/${photo._id}`);
+    } else {
+      history.push(`/photos/${photo._id}`);
+    }
   };
   return (
     <div className={classes.root}>

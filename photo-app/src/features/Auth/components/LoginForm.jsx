@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(2, 0),
@@ -24,6 +25,7 @@ const schema = yup.object().shape({
 
 const LoginForm = ({ onSubmit }) => {
   const classes = useStyles();
+  const history = useHistory();
   const form = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
@@ -36,7 +38,9 @@ const LoginForm = ({ onSubmit }) => {
   return (
     <Container component="main" maxWidth="xs">
       <Box border="1px solid #bdbdbd" borderRadius="24px" padding="32px 48px">
-        <Typography variant="subtitle1">Photo app</Typography>
+        <Typography variant="subtitle1" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
+          Photo app
+        </Typography>
         <Typography variant="subtitle2">Join to discover thousands of photos from around the world</Typography>
         <Typography variant="subtitle1">
           Beautiful, free images and photos that you can download and use for any project.

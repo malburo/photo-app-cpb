@@ -10,7 +10,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import InputField from 'form-controls/InputField';
 import PasswordField from 'form-controls/PasswordField';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +31,7 @@ const schema = yup.object().shape({
 
 const RegisterForm = ({ onSubmit }) => {
   const classes = useStyles();
+  const history = useHistory();
   const form = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
@@ -46,7 +47,9 @@ const RegisterForm = ({ onSubmit }) => {
   return (
     <Container component="main" maxWidth="xs">
       <Box border="1px solid #bdbdbd" borderRadius="24px" padding="32px 48px">
-        <Typography variant="subtitle1">Photo app</Typography>
+        <Typography variant="subtitle1" onClick={() => history.push('/')} style={{ cursor: 'pointer' }}>
+          Photo app
+        </Typography>
         <Typography variant="subtitle2">Join to discover thousands of photos from around the world</Typography>
         <Typography variant="subtitle1">
           Beautiful, free images and photos that you can download and use for any project.

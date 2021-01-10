@@ -7,11 +7,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-
+import SearhcPhotoPage from '../features/Photos/pages/SearchPhoto';
 function Routes() {
   return (
     <Router>
       <Switch>
+        <PublicRoute path="/search/photos" component={SearhcPhotoPage} />
         <PublicRoute path="/photos/:photoId" component={Main} />
         <PublicRoute path="/auth" component={AuthFeature} />
         <PrivateRoute path="/users" component={UserFeature} />

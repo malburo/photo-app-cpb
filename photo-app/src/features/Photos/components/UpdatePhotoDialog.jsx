@@ -44,10 +44,10 @@ const UpdatePhotoDialog = ({ photoId }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Update photo label</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Photo label</DialogTitle>
         <DialogContent style={{ width: 400 }}>
           <form id="update-form" onSubmit={form.handleSubmit(onSubmit)}>
-            <InputField name="photoLabel" label="Photo label" placeholder="Enter new photo label!!" form={form} />
+            <InputField name="photoLabel" placeholder="Enter new photo label!!" form={form} />
           </form>
         </DialogContent>
         <DialogActions>

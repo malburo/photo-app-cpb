@@ -2,7 +2,7 @@ import { FormControl, InputAdornment, TextField, Typography } from '@material-ui
 import { Controller } from 'react-hook-form';
 
 const InputField = (props) => {
-  const { form, name, disabled, placeholder, icon, label, defaultValue } = props;
+  const { form, name, disabled, placeholder, icon, label, defaultValue, size } = props;
   const { errors } = form;
   const hasError = !!errors[name];
   return (
@@ -18,6 +18,7 @@ const InputField = (props) => {
         error={hasError}
         disabled={disabled}
         placeholder={placeholder}
+        size={size}
         InputProps={
           icon && {
             startAdornment: <InputAdornment position="start">{icon}</InputAdornment>,

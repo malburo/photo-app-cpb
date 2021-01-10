@@ -1,6 +1,5 @@
-import { Switch, useRouteMatch, Route } from 'react-router-dom/cjs/react-router-dom.min';
+import { Route, Switch, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 import GalleryPage from './pages/GalleryPage';
-
 const PhotoFeature = () => {
   const match = useRouteMatch();
   return (

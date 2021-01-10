@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PhotoList = ({ photos }) => {
+const Gallery = ({ photos }) => {
   const classes = useStyles();
   return (
     <Container>
@@ -27,4 +27,4 @@ const PhotoList = ({ photos }) => {
   );
 };
 
-export default PhotoList;
+export default Gallery;

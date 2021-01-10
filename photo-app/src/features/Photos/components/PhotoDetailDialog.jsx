@@ -77,6 +77,10 @@ const PhotoDetailDialog = () => {
     setOpen(false);
     if (history.location.pathname.split('/')[1] === 'gallery') {
       history.push('/gallery');
+      return;
+    }
+    if (history.location.pathname.split('/')[1] === 'search') {
+      history.goBack();
     } else {
       history.push('/');
     }
