@@ -52,7 +52,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '50%',
   },
 }));
-const MyPhotoCard = ({ photo }) => {
+const MyPhotoCard = ({ photo, onUploadPhoto, onDeletePhoto }) => {
   const classes = useStyles();
   const history = useHistory();
   const handleClickPhoto = () => {
@@ -62,8 +62,8 @@ const MyPhotoCard = ({ photo }) => {
     <div className={classes.root}>
       <img alt={photo.photoLabel} src={photo.photoUrl} className={classes.image} onClick={handleClickPhoto} />
       <div className={classes.header}>
-        <UpdatePhotoDialog photoId={photo._id} photoLabel={photo.photoLabel} />
-        <DeletePhotoDialog photoId={photo._id} />
+        <UpdatePhotoDialog photoId={photo._id} photoLabel={photo.photoLabel} onUploadPhoto={onUploadPhoto} />
+        <DeletePhotoDialog photoId={photo._id} onDeletePhoto={onDeletePhoto} />
       </div>
       <div className={classes.footer}>
         <Avatar variant="rounded" src={photo.userId.profilePictureUrl} className={classes.avatar} />

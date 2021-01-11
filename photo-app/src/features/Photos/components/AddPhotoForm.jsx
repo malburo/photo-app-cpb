@@ -4,8 +4,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { unwrapResult } from '@reduxjs/toolkit';
 import uploadApi from 'api/uploadApi';
 import InputField from 'form-controls/InputField';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const AddPhotoForm = () => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState('');
   const dispatch = useDispatch();
@@ -57,12 +60,18 @@ const AddPhotoForm = () => {
   });
 
   const onSubmit = async (values) => {
-    const formData = new FormData();
-    formData.append('image', values.image[0]);
-    const photoUrl = await uploadApi.upload(formData);
-    delete values.image;
-    values.photoUrl = photoUrl.path;
-    await dispatch(createPhoto(values));
+    try {
+      const formData = new FormData();
+      formData.append('image', values.image[0]);
+      const photoUrl = await uploadApi.upload(formData);
+      delete values.image;
+      values.photoUrl = photoUrl.path;
+      await dispatch(createPhoto(values)).then(unwrapResult);
+      setOpen(false);
+      enqueueSnackbar('Create photo successfully !!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(error.message, { variant: 'error' });
+    }
   };
   const handleChangeImage = () => {
     const reader = new FileReader();

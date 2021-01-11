@@ -6,6 +6,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InfoBox = ({ currentUser }) => {
+  const history = useHistory();
   const classes = useStyles();
 
   return (
@@ -38,7 +40,9 @@ const InfoBox = ({ currentUser }) => {
           secondary="Some info maybe visible to other people"
           style={{ margin: '16px 20px' }}
         />
-        <Button color="secondary">Edit</Button>
+        <Button variant="contained" color="default" onClick={() => history.push('/users/profile/edit')}>
+          Edit
+        </Button>
       </ListItem>
       <ListItem divider>
         <ListItemText primary="PHOTO" className={classes.firstText} />

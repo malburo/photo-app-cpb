@@ -7,12 +7,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputField from 'form-controls/InputField';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { updatePhoto } from '../photoSlice';
 
-const UpdatePhotoDialog = ({ photoId }) => {
+const UpdatePhotoDialog = ({ photoId, onUploadPhoto }) => {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -30,12 +27,13 @@ const UpdatePhotoDialog = ({ photoId }) => {
 
   const onSubmit = async (values) => {
     values.photoId = photoId;
-    dispatch(updatePhoto(values));
+    onUploadPhoto(values);
+    setOpen(false);
   };
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen} style={{ marginRight: 10 }}>
         Update
       </Button>
       <Dialog

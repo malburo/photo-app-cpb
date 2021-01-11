@@ -1,7 +1,7 @@
 import { Container, makeStyles } from '@material-ui/core';
 import MyPhotoCard from './MyPhotoCard';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     marginTop: '6rem',
     columnCount: 3,
@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Gallery = ({ photos }) => {
+const Gallery = ({ photos, onUploadPhoto, onDeletePhoto }) => {
   const classes = useStyles();
   return (
     <Container>
       <div className={classes.root}>
         {photos.map((photo) => (
-          <MyPhotoCard key={photo._id} photo={photo} />
+          <MyPhotoCard key={photo._id} photo={photo} onUploadPhoto={onUploadPhoto} onDeletePhoto={onDeletePhoto} />
         ))}
       </div>
     </Container>

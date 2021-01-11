@@ -33,12 +33,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginBottom: theme.spacing(1),
+    cursor: 'pointer',
   },
 }));
 
 const schema = yup.object().shape({
   fullname: yup.string().required('Please enter your email.').min(6, 'Please enter a valid email address.'),
-  email: yup.string().required('Please enter your password').email('Please enter at least 6 characters.'),
+  email: yup.string().required('Please enter your password').email('Please enter a valid email address.'),
   bio: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
 });
 
@@ -64,12 +65,14 @@ const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
   }, [currentUser]);
   return (
     <Container component="main" maxWidth="md">
-      <input type="file" name="file" onChange={onUpdateAvatar} />
+      <input type="file" name="file" id="avatar" onChange={onUpdateAvatar} style={{ display: 'none' }} />
       <Box maxWidth={400}>
-        <div className={classes.avatarBox}>
-          <Avatar variant="rounded" className={classes.large} src={currentUser.profilePictureUrl} />
-          <Typography>Change Avatar</Typography>
-        </div>
+        <label htmlFor="avatar">
+          <div className={classes.avatarBox}>
+            <Avatar variant="rounded" className={classes.large} src={currentUser.profilePictureUrl} />
+            <Typography>Change Avatar</Typography>
+          </div>
+        </label>
 
         <form onSubmit={form.handleSubmit(onUpdateInfo)}>
           <InputField name="fullname" icon={<PersonIcon />} placeholder="Enter your fullname..." form={form} />

@@ -30,7 +30,9 @@ const userSlice = createSlice({
   },
   reducers: {
     searchPhoto(state, action) {
-      state.searchPhotoList = state.photoList.filter((photo) => photo.userId.fullname.indexOf(action.payload) > -1);
+      state.searchPhotoList = state.photoList.filter(
+        (photo) => photo.userId.fullname.toLowerCase().indexOf(action.payload.toLowerCase()) > -1
+      );
     },
   },
   extraReducers: {

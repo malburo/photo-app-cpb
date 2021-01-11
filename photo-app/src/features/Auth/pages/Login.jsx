@@ -1,4 +1,6 @@
 import { makeStyles } from '@material-ui/core';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { useSnackbar } from 'notistack';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../../app/userSlice';
@@ -15,13 +17,19 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Login = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSubmit = async (values) => {
-    await dispatch(login(values));
-    history.push('/');
+    try {
+      await dispatch(login(values)).then(unwrapResult);
+      history.push('/');
+      enqueueSnackbar('Login successfully !!', { variant: 'success' });
+    } catch (error) {
+      enqueueSnackbar(error.message, { variant: 'error' });
+    }
   };
   return (
     <div className={classes.wrapper}>
