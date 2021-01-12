@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Avatar } from '@material-ui/core';
@@ -38,9 +39,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
-  fullname: yup.string().required('Please enter your email.').min(6, 'Please enter a valid email address.'),
-  email: yup.string().required('Please enter your password').email('Please enter a valid email address.'),
-  bio: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
+  fullname: yup
+    .string()
+    .required('Please enter your fullname.')
+    .min(2, 'Please enter at least 2 characters.')
+    .max(30, 'Please enter at most 30 characters'),
+  email: yup
+    .string()
+    .required('Please enter your email')
+    .min(6, 'Please enter at least 6 characters.')
+    .max(35, 'Please enter at most 35 characters')
+    .matches(/(\W|^)[\w.+\-]*@gmail\.com(\W|$)/, 'Please enter a valid email address.'),
+  bio: yup
+    .string()
+    .required('Please enter your bio')
+    .min(2, 'Please enter at least 2 characters.')
+    .max(50, 'Please enter at most 50 characters'),
 });
 
 const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
@@ -48,7 +62,7 @@ const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
   const classes = useStyles();
   const form = useForm({
     mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: {
       fullname: '',
       email: '',

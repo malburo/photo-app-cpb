@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,6 +8,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputField from 'form-controls/InputField';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+const schema = yup.object().shape({
+  photoLabel: yup
+    .string()
+    .required('Please enter photo label.')
+    .min(2, 'Please enter at least 2 characters.')
+    .max(30, 'Please enter at most 30 characters'),
+});
 
 const UpdatePhotoDialog = ({ photoId, onUploadPhoto }) => {
   const [open, setOpen] = useState(false);
@@ -19,10 +29,11 @@ const UpdatePhotoDialog = ({ photoId, onUploadPhoto }) => {
   };
   const form = useForm({
     mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: {
       photoLabel: '',
     },
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (values) => {

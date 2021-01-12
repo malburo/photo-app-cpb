@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -20,9 +21,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
-  fullname: yup.string().required('Please enter your full name.').min(6, 'Please enter at least 6 characters.'),
-  email: yup.string().required('Please enter your email.').email('Please enter a valid email address.'),
-  password: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
+  fullname: yup
+    .string()
+    .required('Please enter your full name.')
+    .min(2, 'Please enter at least 2 characters.')
+    .max(30, 'Please enter at most 30 characters'),
+  email: yup
+    .string()
+    .required('Please enter your email.')
+    .min(6, 'Please enter at least 6 characters.')
+    .max(35, 'Please enter at most 35 characters')
+    .matches(/(\W|^)[\w.+\-]*@gmail\.com(\W|$)/, 'Please enter a valid email address.'),
+  password: yup
+    .string()
+    .required('Please enter your password')
+    .min(6, 'Please enter at least 6 characters.')
+    .max(30, 'Please enter at most 30 characters'),
   retypePassword: yup
     .string()
     .required('Please retype your password.')

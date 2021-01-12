@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -19,8 +20,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
-  email: yup.string().required('Please enter your email.').email('Please enter a valid email address.'),
-  password: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters.'),
+  email: yup
+    .string()
+    .required('Please enter your email.')
+    .min(6, 'Please enter at least 6 characters.')
+    .max(35, 'Please enter at most 35 characters')
+    .matches(/(\W|^)[\w.+\-]*@gmail\.com(\W|$)/, 'Please enter a valid email address.'),
+  password: yup
+    .string()
+    .required('Please enter your password')
+    .min(6, 'Please enter at least 6 characters.')
+    .max(30, 'Please enter at most 30 characters'),
 });
 
 const LoginForm = ({ onSubmit }) => {
@@ -28,7 +38,7 @@ const LoginForm = ({ onSubmit }) => {
   const history = useHistory();
   const form = useForm({
     mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: {
       email: '',
       password: '',

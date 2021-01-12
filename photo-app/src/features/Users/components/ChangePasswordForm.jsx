@@ -27,8 +27,13 @@ const schema = yup.object().shape({
   currentPassword: yup
     .string()
     .required('Please enter current password.')
-    .min(6, 'Please enter at least 6 characters.'),
-  newPassword: yup.string().required('Please enter new password').min(6, 'Please enter at least 6 characters.'),
+    .min(6, 'Please enter at least 6 characters.')
+    .max(30, 'Please enter at most 30 characters'),
+  newPassword: yup
+    .string()
+    .required('Please enter new password')
+    .min(6, 'Please enter at least 6 characters.')
+    .max(30, 'Please enter at most 30 characters'),
   retypePassword: yup
     .string()
     .required('Please retype your password.')
@@ -39,7 +44,7 @@ const ChangePasswordForm = ({ onUpdatePassword }) => {
   const classes = useStyles();
   const form = useForm({
     mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: {
       currentPassword: '',
       newPassword: '',

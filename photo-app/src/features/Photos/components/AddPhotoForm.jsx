@@ -12,8 +12,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { createPhoto } from '../photoSlice';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   dialog: {
     width: 400,
   },
@@ -35,6 +37,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+const schema = yup.object().shape({
+  photoLabel: yup
+    .string()
+    .required('Please enter photo label.')
+    .min(2, 'Please enter at least 2 characters.')
+    .max(30, 'Please enter at most 30 characters'),
+});
 const AddPhotoForm = () => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
@@ -52,11 +62,12 @@ const AddPhotoForm = () => {
 
   const form = useForm({
     mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     defaultValues: {
       photoLabel: '',
       image: null,
     },
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (values) => {
