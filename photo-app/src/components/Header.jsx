@@ -17,8 +17,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import Logo from '../../images/Logo-small.svg';
-import SearchForm from '../SearchForm';
+import Logo from '../images/Logo-small.svg';
+import SearchForm from './SearchForm';
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',

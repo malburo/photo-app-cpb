@@ -1,3 +1,4 @@
+import NotFound from 'components/NotFound';
 import StorageKeys from 'constants/storage-key';
 import { useEffect } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
@@ -16,6 +17,7 @@ const AuthFeature = () => {
     <Switch>
       <Route exact path={`${match.url}/login`} component={Login} />
       <Route exact path={`${match.url}/register`} component={Register} />
+      <Route component={NotFound} />
     </Switch>
   );
 };

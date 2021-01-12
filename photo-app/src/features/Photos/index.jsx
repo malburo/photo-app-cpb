@@ -1,3 +1,4 @@
+import NotFound from 'components/NotFound';
 import { Route, Switch, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
 import GalleryPage from './pages/GalleryPage';
 const PhotoFeature = () => {
@@ -6,6 +7,7 @@ const PhotoFeature = () => {
     <Switch>
       <Route exact path={match.url} component={GalleryPage} />
       <Route exact path={`${match.url}/photos/:photoId`} component={GalleryPage} />
+      <Route component={NotFound} />
     </Switch>
   );
 };
