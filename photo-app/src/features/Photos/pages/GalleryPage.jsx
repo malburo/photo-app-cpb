@@ -7,7 +7,7 @@ import Gallery from '../components/Gallery';
 import { deletePhoto, getAllPhotosOfMe, updatePhoto } from '../photoSlice';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useSnackbar } from 'notistack';
-
+import EmptyData from '../../../components/EmptyData';
 const GalleryPage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const GalleryPage = () => {
   return (
     <div>
       <Header />
+      {gallery.length === 0 && <EmptyData />}
       <Gallery photos={gallery} onUploadPhoto={handleUpdatePhoto} onDeletePhoto={handleDeletePhoto} />
       <Switch>
         <Route path={`/gallery/photos/:photoId`} component={PhotoDetailDialog} />

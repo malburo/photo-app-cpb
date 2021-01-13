@@ -1,77 +1,72 @@
-import { Avatar, makeStyles } from '@material-ui/core';
+import { Avatar, Box, Divider, makeStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
+import commentApi from 'api/commentApi';
 import photoApi from 'api/photoApi';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import CommentForm from './CommentForm';
 
-const useStyles = makeStyles((theme) => ({
-  content: {
-    minWidth: 600,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const useStyles = makeStyles(() => ({
   image: {
-    height: 500,
+    height: '100%',
   },
   photoLabel: {
     textAlign: 'center',
     margin: '5px 0px 20px 0px',
   },
-}));
-
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-    display: 'flex',
-  },
   avatar: {
     borderRadius: '50%',
-    margin: '0px 20px',
+    margin: '0px 20px 0px 0px',
   },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
+  fullname: {
+    fontSize: '14px',
+    fontWeight: 600,
+    lineHeight: '16px',
+    color: '#0d0c22',
   },
-});
-
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, avatar, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Avatar variant="rounded" src={avatar} className={classes.avatar} />
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
+  contentComment: {
+    fontSize: '14px',
+    color: '#3d3d4e',
   },
-}))(MuiDialogContent);
+  date: {
+    fontSize: '14px',
+    color: '#3d3d4e',
+  },
+  author: {
+    fontSize: '14px',
+    color: '#3d3d4e',
+    fontWeight: 600,
+  },
+}));
 
 const PhotoDetailDialog = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const [photo, setPhoto] = useState({});
+  const [date, setDate] = useState('');
+  const [commentList, setCommentList] = useState([]);
   const history = useHistory();
   const { photoId } = useParams();
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [commentList]);
+
+  useEffect(() => {
+    const featchPhoto = async () => {
+      const data = await photoApi.getById(photoId);
+      const dataComment = await commentApi.getByPhotoId(photoId);
+      const date = new Date(data.photo.createdAt);
+
+      setCommentList(dataComment.commentList);
+      setPhoto(data.photo);
+      setDate(date.toDateString());
+    };
+    featchPhoto();
+  }, [history, photoId]);
 
   const handleClose = () => {
     setOpen(false);
@@ -85,27 +80,56 @@ const PhotoDetailDialog = () => {
       history.push('/');
     }
   };
-  useEffect(() => {
-    const featchPhoto = async () => {
-      const data = await photoApi.getById(photoId);
-      setPhoto(data.photo);
+  const handleSubmitComment = async (values) => {
+    const payload = {
+      photoId,
+      content: values.content,
     };
-    featchPhoto();
-  }, [history, photoId]);
+    const data = await commentApi.createComment(payload);
+    setCommentList([...commentList, data.newComment]);
+  };
   return (
-    <div>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} avatar={photo.userId?.profilePictureUrl}>
-          {photo.userId?.fullname}
-        </DialogTitle>
-        <DialogContent className={classes.content}>
+    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <Box display="flex" justifyContent="center" margin="50px">
+        <Box height="600px">
           <img src={photo.photoUrl} alt={photo.photoLabel} className={classes.image} />
-        </DialogContent>
-        <Typography variant="h6" color="initial" className={classes.photoLabel}>
-          {photo.photoLabel}
-        </Typography>
-      </Dialog>
-    </div>
+          <Typography variant="h6" color="initial" style={{ textAlign: 'center' }}>
+            {photo.photoLabel}
+          </Typography>
+        </Box>
+        <Box width="300px" marginLeft="30px">
+          <Box display="flex" alignItems="center" marginBottom="10px">
+            <Avatar variant="rounded" src={photo.userId?.profilePictureUrl} className={classes.avatar} />
+            <Box>
+              <Typography variant="h6" className={classes.author}>
+                {photo.userId?.fullname}
+              </Typography>
+              <Typography variant="h6" className={classes.date}>
+                {date}
+              </Typography>
+            </Box>
+          </Box>
+          <Divider style={{ height: '0.5px' }} />
+          <Box width="100%" height="454px" overflow="scroll" style={{ wordBreak: 'break-word' }} marginTop="20px">
+            {commentList.map((comment) => (
+              <Box key={comment._id} display="flex" marginBottom="20px">
+                <Avatar variant="rounded" src={comment.userId.profilePictureUrl} className={classes.avatar} />
+                <Box>
+                  <Typography variant="h6" className={classes.fullname}>
+                    {comment.userId.fullname}
+                  </Typography>
+                  <Typography variant="h6" className={classes.contentComment}>
+                    {comment.content}
+                  </Typography>
+                </Box>
+              </Box>
+            ))}
+            <div ref={messagesEndRef} />
+          </Box>
+          <CommentForm onSubmitComment={handleSubmitComment} />
+        </Box>
+      </Box>
+    </Dialog>
   );
 };
 
