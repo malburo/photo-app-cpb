@@ -39,17 +39,32 @@ const useStyles = makeStyles(() => ({
     color: '#3d3d4e',
     fontWeight: 600,
   },
+  auth: {
+    textAlign: 'center',
+    borderRadius: 10,
+    backgroundColor: '#e8e8e8',
+    padding: 10,
+  },
 }));
 
 const PhotoDetailDialog = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
+  const [auth, setAuth] = useState(false);
   const [photo, setPhoto] = useState({});
   const [date, setDate] = useState('');
   const [commentList, setCommentList] = useState([]);
   const history = useHistory();
   const { photoId } = useParams();
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    if (!localStorage.access_token) {
+      setAuth(false);
+    } else {
+      setAuth(true);
+    }
+  }, [commentList]);
 
   useEffect(() => {
     messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
@@ -126,7 +141,13 @@ const PhotoDetailDialog = () => {
             ))}
             <div ref={messagesEndRef} />
           </Box>
-          <CommentForm onSubmitComment={handleSubmitComment} />
+          {auth ? (
+            <CommentForm onSubmitComment={handleSubmitComment} />
+          ) : (
+            <Typography variant="h6" color="initial" className={classes.auth}>
+              Đăng nhập để bình luận
+            </Typography>
+          )}
         </Box>
       </Box>
     </Dialog>
