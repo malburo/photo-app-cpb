@@ -1,12 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import photoApi from 'api/photoApi';
+import userApi from 'api/userApi';
 
 export const getAllPhotos = createAsyncThunk('photos/getAll', async () => {
   const data = await photoApi.getAll();
   return data;
 });
-export const getAllPhotosOfMe = createAsyncThunk('photos/getAllOfMe', async () => {
-  const data = await photoApi.getAllOfMe();
+export const getPhotosOfUser = createAsyncThunk('photos/getPhotosOfUser', async (payload) => {
+  const data = await userApi.getPhotosOfUser(payload);
+  return data;
+});
+export const getOwnerGallery = createAsyncThunk('photos/getOwnerGallery', async (payload) => {
+  const data = await userApi.getUser(payload);
   return data;
 });
 export const createPhoto = createAsyncThunk('photos/create', async (payload) => {
@@ -25,8 +30,9 @@ const userSlice = createSlice({
   name: 'photos',
   initialState: {
     photoList: [],
-    gallery: [],
     searchPhotoList: [],
+    gallery: [],
+    ownerGallery: {},
   },
   reducers: {
     searchPhoto(state, action) {
@@ -37,8 +43,11 @@ const userSlice = createSlice({
     [getAllPhotos.fulfilled]: (state, { payload }) => {
       state.photoList = payload.photos;
     },
-    [getAllPhotosOfMe.fulfilled]: (state, { payload }) => {
+    [getPhotosOfUser.fulfilled]: (state, { payload }) => {
       state.gallery = payload.photos;
+    },
+    [getOwnerGallery.fulfilled]: (state, { payload }) => {
+      state.ownerGallery = payload.user;
     },
     [createPhoto.fulfilled]: (state, { payload }) => {
       state.photoList.unshift(payload.newPhoto);

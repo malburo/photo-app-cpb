@@ -47,6 +47,8 @@ const PhotoCard = ({ photo }) => {
   const handleClickPhoto = () => {
     if (history.location.pathname.split('/')[1] === 'search') {
       history.push(`/search/photos/${photo._id}`);
+    } else if (history.location.pathname.split('/')[1] === 'gallery') {
+      history.push(`/gallery/photos/${photo._id}`);
     } else {
       history.push(`/photos/${photo._id}`);
     }

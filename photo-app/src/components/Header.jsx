@@ -12,11 +12,11 @@ import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { logout } from 'app/userSlice';
 import StorageKeys from 'constants/storage-key';
-import AddPhotoForm from 'features/Photos/components/AddPhotoForm';
+import AddPhotoForm from 'features/Photos/components/Forms/AddPhotoForm';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Logo from '../images/Logo-small.svg';
 import SearchForm from './SearchForm';
 const useStyles = makeStyles(() => ({
@@ -29,10 +29,12 @@ const useStyles = makeStyles(() => ({
 const Header = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { userId } = useParams();
   const currentUser = useSelector((state) => state.user.current);
   const [anchorEl, setAnchorEl] = useState(null);
   const [auth, setAuth] = useState(false);
   const dispatch = useDispatch();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -61,7 +63,7 @@ const Header = () => {
           </Box>
           <SearchForm />
           <Box display="flex" alignItems="center">
-            {history.location.pathname === '/gallery' && <AddPhotoForm />}
+            {currentUser._id === userId && userId !== undefined && <AddPhotoForm />}
             {auth ? (
               <Avatar
                 variant="rounded"
@@ -93,7 +95,7 @@ const Header = () => {
           </ListItemIcon>
           Profile
         </MenuItem>
-        <MenuItem onClick={() => history.push('/gallery')}>
+        <MenuItem onClick={() => history.push(`/gallery/${currentUser._id}`)}>
           <ListItemIcon>
             <ImageIcon fontSize="small" />
           </ListItemIcon>

@@ -5,7 +5,7 @@ const PhotoFeature = () => {
   const match = useRouteMatch();
   return (
     <Switch>
-      <Route exact path={match.url} component={GalleryPage} />
+      <Route exact path={`${match.url}/:userId`} component={GalleryPage} />
       <Route exact path={`${match.url}/photos/:photoId`} component={GalleryPage} />
       <Route component={NotFound} />
     </Switch>

@@ -6,7 +6,7 @@ import photoApi from 'api/photoApi';
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import CommentForm from './CommentForm';
+import CommentForm from './Forms/CommentForm';
 
 const useStyles = makeStyles(() => ({
   image: {
@@ -25,6 +25,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: 600,
     lineHeight: '16px',
     color: '#0d0c22',
+    cursor: 'pointer',
+    '&:hover': {
+      color: '#2f80ed',
+    },
   },
   contentComment: {
     fontSize: '14px',
@@ -33,11 +37,6 @@ const useStyles = makeStyles(() => ({
   date: {
     fontSize: '14px',
     color: '#3d3d4e',
-  },
-  author: {
-    fontSize: '14px',
-    color: '#3d3d4e',
-    fontWeight: 600,
   },
   auth: {
     textAlign: 'center',
@@ -85,15 +84,7 @@ const PhotoDetailDialog = () => {
 
   const handleClose = () => {
     setOpen(false);
-    if (history.location.pathname.split('/')[1] === 'gallery') {
-      history.push('/gallery');
-      return;
-    }
-    if (history.location.pathname.split('/')[1] === 'search') {
-      history.goBack();
-    } else {
-      history.push('/');
-    }
+    history.goBack();
   };
   const handleSubmitComment = async (values) => {
     const payload = {
@@ -116,7 +107,11 @@ const PhotoDetailDialog = () => {
           <Box display="flex" alignItems="center" marginBottom="10px">
             <Avatar variant="rounded" src={photo.userId?.profilePictureUrl} className={classes.avatar} />
             <Box>
-              <Typography variant="h6" className={classes.author}>
+              <Typography
+                variant="h6"
+                className={classes.fullname}
+                onClick={() => history.push(`/gallery/${photo.userId._id}`)}
+              >
                 {photo.userId?.fullname}
               </Typography>
               <Typography variant="h6" className={classes.date}>
@@ -130,7 +125,11 @@ const PhotoDetailDialog = () => {
               <Box key={comment._id} display="flex" marginBottom="20px">
                 <Avatar variant="rounded" src={comment.userId.profilePictureUrl} className={classes.avatar} />
                 <Box>
-                  <Typography variant="h6" className={classes.fullname}>
+                  <Typography
+                    variant="h6"
+                    className={classes.fullname}
+                    onClick={() => history.push(`/gallery/${comment.userId._id}`)}
+                  >
                     {comment.userId.fullname}
                   </Typography>
                   <Typography variant="h6" className={classes.contentComment}>

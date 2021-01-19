@@ -14,12 +14,12 @@ export const login = createAsyncThunk('user/login', async (payload) => {
 });
 
 export const getMe = createAsyncThunk('user/getMe', async () => {
-  const data = await userApi.getMe();
+  const data = await authApi.getMe();
   return data;
 });
 
-export const updateMe = createAsyncThunk('user/updateMe', async (payload) => {
-  const data = await userApi.updateMe(payload);
+export const updateUserInfo = createAsyncThunk('user/updateUserInfo', async (payload) => {
+  const data = await userApi.updateUserInfo(payload);
   return data;
 });
 
@@ -56,7 +56,7 @@ const userSlice = createSlice({
       state.current = payload.currentUser;
     },
 
-    [updateMe.fulfilled]: (state, { payload }) => {
+    [updateUserInfo.fulfilled]: (state, { payload }) => {
       state.current = payload.currentUser;
     },
 

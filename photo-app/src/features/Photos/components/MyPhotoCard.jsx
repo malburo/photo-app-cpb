@@ -1,7 +1,7 @@
 import { Avatar, makeStyles } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import DeletePhotoDialog from './DeletePhotoDialog';
-import UpdatePhotoDialog from './UpdatePhotoDialog';
+import UpdatePhotoDialog from './Forms/UpdatePhotoDialog';
 
 const useStyles = makeStyles(() => ({
   root: {

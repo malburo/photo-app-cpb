@@ -16,8 +16,8 @@ function Routes() {
         <PublicRoute path="/search/photos" component={SearhcPhotoPage} />
         <PublicRoute path="/photos/:photoId" component={Main} />
         <PublicRoute path="/auth" component={AuthFeature} />
+        <PublicRoute path="/gallery" component={PhotoFeature} />
         <PrivateRoute path="/users" component={UserFeature} />
-        <PrivateRoute path="/gallery" component={PhotoFeature} />
         <PublicRoute exact path="/" component={Main} />
         <Route exact path="/404" component={NotFound} />
         <Route component={NotFound} />

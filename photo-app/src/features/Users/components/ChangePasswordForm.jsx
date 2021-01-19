@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LockIcon from '@material-ui/icons/Lock';
 import PasswordField from 'form-controls/PasswordField';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,7 @@ const schema = yup.object().shape({
 });
 
 const ChangePasswordForm = ({ onUpdatePassword }) => {
+  const currentUser = useSelector((state) => state.user.current);
   const classes = useStyles();
   const form = useForm({
     mode: 'onSubmit',
@@ -52,11 +54,17 @@ const ChangePasswordForm = ({ onUpdatePassword }) => {
     },
     resolver: yupResolver(schema),
   });
-
+  const handleUpdatePassword = (values) => {
+    const payload = {
+      ...values,
+      userId: currentUser._id,
+    };
+    onUpdatePassword(payload);
+  };
   return (
     <Container component="main" maxWidth="md">
       <Box maxWidth={400}>
-        <form onSubmit={form.handleSubmit(onUpdatePassword)}>
+        <form onSubmit={form.handleSubmit(handleUpdatePassword)}>
           <PasswordField
             name="currentPassword"
             label="Name"

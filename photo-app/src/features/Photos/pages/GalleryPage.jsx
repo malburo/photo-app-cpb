@@ -1,21 +1,27 @@
+import { unwrapResult } from '@reduxjs/toolkit';
 import Header from 'components/Header';
+import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
-import PhotoDetailDialog from '../components/PhotoDetailDialog';
-import Gallery from '../components/Gallery';
-import { deletePhoto, getAllPhotosOfMe, updatePhoto } from '../photoSlice';
-import { unwrapResult } from '@reduxjs/toolkit';
-import { useSnackbar } from 'notistack';
 import EmptyData from '../../../components/EmptyData';
+import GalleryPhotoList from '../components/GalleryPhotoList';
+import PhotoDetailDialog from '../components/PhotoDetailDialog';
+import { deletePhoto, getOwnerGallery, getPhotosOfUser, updatePhoto } from '../photoSlice';
+
 const GalleryPage = () => {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const gallery = useSelector((state) => state.photos.gallery);
+  const { userId } = useParams();
 
   useEffect(() => {
-    dispatch(getAllPhotosOfMe());
-  }, [dispatch]);
+    if (userId) {
+      dispatch(getOwnerGallery({ userId }));
+      dispatch(getPhotosOfUser({ userId }));
+    }
+  }, [dispatch, userId]);
 
   const handleUpdatePhoto = async (values) => {
     try {
@@ -37,8 +43,8 @@ const GalleryPage = () => {
   return (
     <div>
       <Header />
+      <GalleryPhotoList photos={gallery} onUploadPhoto={handleUpdatePhoto} onDeletePhoto={handleDeletePhoto} />
       {gallery.length === 0 && <EmptyData />}
-      <Gallery photos={gallery} onUploadPhoto={handleUpdatePhoto} onDeletePhoto={handleDeletePhoto} />
       <Switch>
         <Route path={`/gallery/photos/:photoId`} component={PhotoDetailDialog} />
       </Switch>

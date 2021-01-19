@@ -77,9 +77,24 @@ const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
       form.setValue('bio', currentUser.bio || '');
     }
   }, [currentUser]);
+  
+  const handleUpdateInfo = (values) => {
+    const payload = {
+      ...values,
+      userId: currentUser._id,
+    };
+    onUpdateInfo(payload);
+  };
+  const handleUpdateAvatar = (values) => {
+    const payload = {
+      ...values,
+      userId: currentUser._id,
+    };
+    onUpdateAvatar(payload);
+  };
   return (
     <Container component="main" maxWidth="md">
-      <input type="file" name="file" id="avatar" onChange={onUpdateAvatar} style={{ display: 'none' }} />
+      <input type="file" name="file" id="avatar" onChange={handleUpdateAvatar} style={{ display: 'none' }} />
       <Box maxWidth={400}>
         <label htmlFor="avatar">
           <div className={classes.avatarBox}>
@@ -88,7 +103,7 @@ const EditForm = ({ onUpdateInfo, onUpdateAvatar }) => {
           </div>
         </label>
 
-        <form onSubmit={form.handleSubmit(onUpdateInfo)}>
+        <form onSubmit={form.handleSubmit(handleUpdateInfo)}>
           <InputField name="fullname" icon={<PersonIcon />} placeholder="Enter your fullname..." form={form} />
           <InputField name="email" icon={<MailIcon />} placeholder="Enter your email..." form={form} />
           <InputField name="bio" icon={<SubtitlesIcon />} placeholder="Enter your bio..." form={form} />

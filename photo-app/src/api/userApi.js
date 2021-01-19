@@ -1,20 +1,24 @@
 import request from '../helpers/request';
 
 const userApi = {
-  getMe: () => {
-    return request.get('users/me');
+  getUser: ({ userId }) => {
+    return request.get(`users/${userId}`);
   },
-  updateMe: (payload) => {
-    return request.post('users/me', payload);
+  updateUserInfo: (payload) => {
+    return request.put(`users/${payload.userId}`, payload);
   },
   updatePassword: (payload) => {
-    return request.post('users/me/password', payload);
+    return request.put(`users/${payload.userId}/change-password`, payload);
   },
   updateAvatar: (payload) => {
-    return request.post('users/me/avatar', payload);
+    return request.put(`users/${payload.userId}/change-avatar`, payload);
   },
   deleteMe: (payload) => {
-    return request.post('users/me', payload);
+    return request.post(`users/${payload.userId}`, payload);
+  },
+  getPhotosOfUser: ({ userId }) => {
+    console.log(userId);
+    return request.get(`users/${userId}/photos`);
   },
 };
 export default userApi;

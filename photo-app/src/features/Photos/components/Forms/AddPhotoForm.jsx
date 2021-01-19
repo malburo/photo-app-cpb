@@ -11,7 +11,7 @@ import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { createPhoto } from '../photoSlice';
+import { createPhoto } from '../../photoSlice';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
