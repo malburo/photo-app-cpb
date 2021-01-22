@@ -1,4 +1,5 @@
 import { getMe } from 'app/userSlice';
+import EmptySearchResult from 'components/EmptySearchResult';
 import Header from 'components/Header';
 import StorageKeys from 'constants/storage-key';
 import queryString from 'query-string';
@@ -29,6 +30,7 @@ const SearchPhotoPage = () => {
     <div>
       <Header />
       <PhotoList photos={searchPhotoList} />
+      {searchPhotoList.length === 0 && <EmptySearchResult />}
       <Switch>
         <Route path={`/search/photos/:photoId`} component={PhotoDetailDialog} />
       </Switch>

@@ -39,6 +39,7 @@ const useStyles = makeStyles(() => ({
     color: '#3d3d4e',
   },
   auth: {
+    marginTop: 20,
     textAlign: 'center',
     borderRadius: 10,
     backgroundColor: '#e8e8e8',
@@ -144,7 +145,7 @@ const PhotoDetailDialog = () => {
             <CommentForm onSubmitComment={handleSubmitComment} />
           ) : (
             <Typography variant="h6" color="initial" className={classes.auth}>
-              Đăng nhập để bình luận
+              Login to comment...
             </Typography>
           )}
         </Box>

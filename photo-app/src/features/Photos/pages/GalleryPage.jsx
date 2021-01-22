@@ -1,5 +1,7 @@
 import { unwrapResult } from '@reduxjs/toolkit';
+import { getMe } from 'app/userSlice';
 import Header from 'components/Header';
+import StorageKeys from 'constants/storage-key';
 import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +17,12 @@ const GalleryPage = () => {
   const dispatch = useDispatch();
   const gallery = useSelector((state) => state.photos.gallery);
   const { userId } = useParams();
+  
+  useEffect(() => {
+    if (localStorage.getItem(StorageKeys.ACCESS_TOKEN)) {
+      dispatch(getMe());
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     if (userId) {

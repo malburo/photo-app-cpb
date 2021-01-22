@@ -40,7 +40,15 @@ const InfoBox = ({ currentUser }) => {
           secondary="Some info maybe visible to other people"
           style={{ margin: '16px 20px' }}
         />
-        <Button variant="contained" color="default" onClick={() => history.push('/users/profile/edit')}>
+        <Button
+          variant="outline"
+          color="default"
+          style={{
+            border: '1px solid #828282',
+            borderRadius: '12px',
+          }}
+          onClick={() => history.push('/users/profile/edit')}
+        >
           Edit
         </Button>
       </ListItem>

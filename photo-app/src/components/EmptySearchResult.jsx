@@ -1,17 +1,18 @@
 import { makeStyles } from '@material-ui/core';
-import Empty from '../images/no-files.png';
+import Empty from '../images/no-search-result.png';
 const useStyles = makeStyles(() => ({
   wrapper: {
+    marginTop: 100,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   image: {
-    width: 300,
+    width: 400,
   },
 }));
 
-function EmptyData() {
+function EmptySearchResult() {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -20,4 +21,4 @@ function EmptyData() {
   );
 }
 
-export default EmptyData;
+export default EmptySearchResult;

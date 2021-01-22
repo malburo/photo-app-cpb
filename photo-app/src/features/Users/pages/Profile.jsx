@@ -14,6 +14,16 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    fontSize: '36px',
+    lineHeight: '50px',
+    margin: '15px 0px',
+  },
+  subTitle: {
+    fontSize: '18px',
+    lineHeight: '25px',
+    fontWeight: 300,
+  },
 }));
 const Profile = () => {
   const classes = useStyles();
@@ -21,13 +31,9 @@ const Profile = () => {
   return (
     <div className={classes.wrapper}>
       <Header />
-      <Typography variant="h4" color="initial">
-        Personal Info
-      </Typography>
+      <Typography className={classes.title}>Personal Info</Typography>
       <Box marginBottom="30px">
-        <Typography variant="h6" color="initial">
-          Basic info, like your name and photo
-        </Typography>
+        <Typography className={classes.subTitle}>Basic info, like your name and photo</Typography>
       </Box>
       <InfoBox currentUser={currentUser} />
     </div>
