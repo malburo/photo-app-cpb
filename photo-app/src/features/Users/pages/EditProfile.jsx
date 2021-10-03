@@ -44,7 +44,7 @@ const EditProfile = () => {
       let formData = new FormData();
       formData.append('image', event.target.files[0]);
       const data = await uploadApi.upload(formData);
-      await dispatch(updateAvatar({ profilePictureUrl: data.path, userId: event.userId })).then(unwrapResult);
+      await dispatch(updateAvatar({ profilePictureUrl: data.uploader.url, userId: event.userId })).then(unwrapResult);
       enqueueSnackbar('Avatar updated successfully !!', { variant: 'success' });
     } catch (error) {
       enqueueSnackbar(error.message, { variant: 'error' });

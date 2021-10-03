@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ChangePasswordForm from './ChangePasswordForm';
 import EditForm from './EditForm';
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

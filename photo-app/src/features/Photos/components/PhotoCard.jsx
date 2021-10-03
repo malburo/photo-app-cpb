@@ -57,8 +57,8 @@ const PhotoCard = ({ photo }) => {
     <div className={classes.root}>
       <img alt={photo.photoLabel} src={photo.photoUrl} className={classes.image} onClick={handleClickPhoto} />
       <div className={classes.footer}>
-        <Avatar variant="rounded" src={photo.userId.profilePictureUrl} className={classes.avatar} />
-        <span>{photo.userId.fullname}</span>
+        <Avatar variant="rounded" src={photo.userId?.profilePictureUrl} className={classes.avatar} />
+        <span>{photo.userId?.fullname}</span>
       </div>
     </div>
   );

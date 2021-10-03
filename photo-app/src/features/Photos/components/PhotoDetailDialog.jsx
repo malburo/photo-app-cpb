@@ -110,8 +110,8 @@ const PhotoDetailDialog = () => {
             <Box>
               <Typography
                 variant="h6"
-                className={classes.fullname}
-                onClick={() => history.push(`/gallery/${photo.userId._id}`)}
+                className={classes?.fullname}
+                onClick={() => history.push(`/gallery/${photo.userId?._id}`)}
               >
                 {photo.userId?.fullname}
               </Typography>
@@ -124,14 +124,14 @@ const PhotoDetailDialog = () => {
           <Box width="100%" height="454px" overflow="scroll" style={{ wordBreak: 'break-word' }} marginTop="20px">
             {commentList.map((comment) => (
               <Box key={comment._id} display="flex" marginBottom="20px">
-                <Avatar variant="rounded" src={comment.userId.profilePictureUrl} className={classes.avatar} />
+                <Avatar variant="rounded" src={comment.userId?.profilePictureUrl} className={classes.avatar} />
                 <Box>
                   <Typography
                     variant="h6"
-                    className={classes.fullname}
+                    className={classes?.fullname}
                     onClick={() => history.push(`/gallery/${comment.userId._id}`)}
                   >
-                    {comment.userId.fullname}
+                    {comment.userId?.fullname}
                   </Typography>
                   <Typography variant="h6" className={classes.contentComment}>
                     {comment.content}

@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { createPhoto } from '../../photoSlice';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles(() => ({
   dialog: {
@@ -49,6 +50,7 @@ const AddPhotoForm = () => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [url, setUrl] = useState('');
   const dispatch = useDispatch();
   const handleClickOpen = () => {
@@ -72,17 +74,19 @@ const AddPhotoForm = () => {
 
   const onSubmit = async (values) => {
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append('image', values.image[0]);
       const photoUrl = await uploadApi.upload(formData);
       delete values.image;
-      values.photoUrl = photoUrl.path;
+      values.photoUrl = photoUrl.uploader.url;
       await dispatch(createPhoto(values)).then(unwrapResult);
       setOpen(false);
       enqueueSnackbar('Create photo successfully !!', { variant: 'success' });
     } catch (error) {
       enqueueSnackbar(error.message, { variant: 'error' });
     }
+    setIsLoading(false);
   };
   const handleChangeImage = () => {
     const reader = new FileReader();
@@ -122,8 +126,8 @@ const AddPhotoForm = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button type="submit" form="hook-form" variant="contained" color="primary">
-            Upload
+          <Button type="submit" form="hook-form" variant="contained" color="primary" disabled={isLoading}>
+            {isLoading ? <CircularProgress size={20} /> : 'Upload'}
           </Button>
           <Button onClick={handleClose} color="primary">
             Cancel

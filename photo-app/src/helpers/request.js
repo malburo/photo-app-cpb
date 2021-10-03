@@ -33,9 +33,9 @@ request.interceptors.response.use(
       localStorage.removeItem(StorageKeys.ACCESS_TOKEN);
       window.location.replace('/auth/login');
     }
-    // if (error.response.status === 404) {
-    //   window.location.replace('/404');
-    // }
+    if (error.response.status === 404) {
+      window.location.replace('/404');
+    }
     return Promise.reject(error.response.data.error || error.message);
   }
 );
