@@ -27,17 +27,17 @@ const useStyles = makeStyles((theme) => ({
 const schema = yup.object().shape({
   currentPassword: yup
     .string()
-    .required('Please enter current password.')
-    .min(6, 'Please enter at least 6 characters.')
-    .max(30, 'Please enter at most 30 characters'),
+    .required('Please enter current password')
+    .min(6, 'Password must be a string between 6-35 characters')
+    .max(35, 'Password must be a string between 6-35 characters'),
   newPassword: yup
     .string()
     .required('Please enter new password')
-    .min(6, 'Please enter at least 6 characters.')
-    .max(30, 'Please enter at most 30 characters'),
+    .min(6, 'Password must be a string between 6-35 characters')
+    .max(35, 'Password must be a string between 6-35 characters'),
   retypePassword: yup
     .string()
-    .required('Please retype your password.')
+    .required('Please retype your password')
     .oneOf([yup.ref('newPassword')], 'Password does not match'),
 });
 
