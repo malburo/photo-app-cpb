@@ -83,14 +83,23 @@ const AddPhotoForm = () => {
       await dispatch(createPhoto(values)).then(unwrapResult);
       setOpen(false);
       enqueueSnackbar('Create photo successfully !!', { variant: 'success' });
+      form.reset();
+      setUrl('');
     } catch (error) {
       enqueueSnackbar(error.message, { variant: 'error' });
     }
     setIsLoading(false);
   };
-  const handleChangeImage = () => {
+  const handleChangeImage = (event) => {
+    const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
     const reader = new FileReader();
     const file = form.getValues('image')[0];
+    if (!SUPPORTED_FORMATS.includes(file.type)) {
+      enqueueSnackbar('Type file does not support', { variant: 'error' });
+      event.target.value = null;
+      setUrl('');
+      return;
+    }
     reader.onloadend = () => {
       setUrl(reader.result);
     };

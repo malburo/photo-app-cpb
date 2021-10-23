@@ -98,7 +98,7 @@ const PhotoDetailDialog = () => {
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
       <Box display="flex" justifyContent="center" margin="50px">
-        <Box height="600px">
+        <Box height="600px" minWidth="600px">
           <img src={photo.photoUrl} alt={photo.photoLabel} className={classes.image} />
           <Typography variant="h6" color="initial" style={{ textAlign: 'center' }}>
             {photo.photoLabel}
