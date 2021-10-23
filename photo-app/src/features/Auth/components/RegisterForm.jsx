@@ -23,23 +23,23 @@ const useStyles = makeStyles((theme) => ({
 const schema = yup.object().shape({
   fullname: yup
     .string()
-    .required('Please enter your full name.')
-    .min(2, 'Please enter at least 2 characters.')
-    .max(30, 'Please enter at most 30 characters'),
+    .required('Please enter your fullname')
+    .min(2, 'Fullname must be a string between 2-35 characters')
+    .max(35, 'Fullname must be a string between 2-35 characters'),
   email: yup
     .string()
-    .required('Please enter your email.')
-    .min(6, 'Please enter at least 6 characters.')
-    .max(35, 'Please enter at most 35 characters')
+    .required('Please enter your email')
+    .min(6, 'Email must be a string between 6-35 characters')
+    .max(35, 'Email must be a string between 6-35 characters')
     .matches(/(\W|^)[\w.+\-]*@gmail\.com(\W|$)/, 'Please enter a valid email address.'),
   password: yup
     .string()
     .required('Please enter your password')
-    .min(6, 'Please enter at least 6 characters.')
-    .max(30, 'Please enter at most 30 characters'),
+    .min(6, 'Password must be a string between 6-35 characters')
+    .max(35, 'Password must be a string between 6-35 characters'),
   retypePassword: yup
     .string()
-    .required('Please retype your password.')
+    .required('Please retype your password')
     .oneOf([yup.ref('password')], 'Password does not match'),
 });
 

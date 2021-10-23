@@ -3,7 +3,7 @@ import StorageKeys from 'constants/storage-key';
 import queryString from 'query-string';
 
 const request = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'http://localhost:8000/api',
   headers: {
     'content-type': 'application/json',
   },
